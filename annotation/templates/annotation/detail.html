@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <title>Article List</title>
+    </head>
+    <body>
+        <article>
+            <h1>{{ article.title }}</h1>
+            <h3>{{ article.subtitle|linebreaks }}</h3>
+            <h3>By: {{ article.author }}</h3>
+            <p>{{ article.body|linebreaks }}</p>
+            <p>{{ article.source }}</p>
+        </article>
+        <h1>Notes</h1>
+            {% if notes %}
+                <ul>
+                {% for note in notes %}
+                    <li>{{ note.note_text }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No notes have been created.</p>
+            {% endif %}
+    </body>
+</html>
