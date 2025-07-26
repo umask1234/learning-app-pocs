@@ -1,0 +1,37 @@
+<!-- myapp/templates/myapp/create_object.html -->
+<!-- <form method="post">
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Note</button>
+</form> -->
+
+<!-- <form action="{% url 'notes' article.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <input type="text" name="selected_text" value="Selected Text">
+    <input type="text" name="note_text" value="Note Text">
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    {% endfor %}
+</fieldset>
+<input type="submit" value="Create Note">
+</form> -->
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="selected_text">Selected Text</label>
+        <textarea name="selected_text" rows="2" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="note_text">Note Text</label>
+        <textarea name="note_text" rows="4" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Note</button>
+</form>
+
+{% if error_message %}
+    <div class="alert alert-danger mt-3">{{ error_message }}</div>
+{% endif %}
