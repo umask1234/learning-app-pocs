@@ -15,5 +15,5 @@ urlpatterns = [
     path("<int:article_id>/", views.detail, name="detail"),
     # path('note/', include(router.urls))
     # path('<int:article_id>/notes/', NotesView.as_view(), name='notes')
-    path('<int:article_id>/notes/', views.notes, name='notes')
+    path('<int:article_id>/notes/', views.notes, name='add_note')
 ]
