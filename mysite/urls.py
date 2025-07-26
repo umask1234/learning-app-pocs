@@ -19,5 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path("annotation/", include("annotation.urls")),
+    path("bookshelf/", include("bookshelf.urls")),
     path('admin/', admin.site.urls),
 ]
