@@ -13,7 +13,7 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("<int:article_id>/", views.detail, name="detail"),
-    # path('note/', include(router.urls))
-    # path('<int:article_id>/notes/', NotesView.as_view(), name='notes')
-    path('<int:article_id>/notes/', views.notes, name='add_note')
+    path('<int:article_id>/notes/', views.notes, name='add_note'), 
+    path('<int:article_id>/notes/<int:note_id>/edit/', views.notes, name='edit_note'),
+    path('<int:article_id>/notes/<int:note_id>/delete/', views.delete_note, name='delete_note'),
 ]

@@ -2,7 +2,7 @@
 <html lang="en-US">
     <head>
         <meta charset="utf-8" />
-        <title>Article List</title>
+        <title>{{ article.title }}</title>
     </head>
     <body>
         <article>
@@ -12,16 +12,28 @@
             <p>{{ article.body|linebreaks }}</p>
             <p>{{ article.source }}</p>
         </article>
-        <h1>Notes</h1>
+        <h1>Notes (click a note to edit!)</h1>
             {% if notes %}
                 <ul>
                 {% for note in notes %}
-                    <li>{{ note.note_text }}</a></li>
+                    <li><a href="/annotation/{{ article.id }}/notes/{{ note.id }}/edit/">{{ note.note_text }}</a></li>
                 {% endfor %}
                 </ul>
             {% else %}
                 <p>No notes have been created.</p>
             {% endif %}
-            <a href="/annotation/{{ article.id }}/notes/">Add a new note!</a>
+            <!-- <a href="/annotation/{{ article.id }}/notes/">Add a new note!</a> -->
+             <button id="add-note-btn" class="btn btn-primary">Add Note</button>
     </body>
 </html>
+
+<script>
+    document.getElementById("add-note-btn").addEventListener("click", function () {
+        const selected_text = window.getSelection().toString();
+
+        // Redirect to note form with selected text as query param
+        const articleId = "{{ article.id }}";
+        const url = `/annotation/${articleId}/notes/?selected_text=` + encodeURIComponent(selected_text);
+        window.location.href = url;
+    });
+</script>

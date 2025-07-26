@@ -1,17 +1,34 @@
 <!-- myapp/templates/myapp/create_object.html -->
+<head>
+    <meta charset="utf-8" />
+    <title>Article List</title>
+</head>
+ {% if error_message %}
+    <div class="alert alert-danger mt-3">{{ error_message }}</div>
+{% endif %}
 <form method="POST">
     {% csrf_token %}
     <div class="form-group">
         <label for="selected_text">Selected Text</label>
-        <textarea name="selected_text" rows="2" class="form-control"></textarea>
+        <textarea id="selected_text" name="selected_text" rows="2" class="form-control">{{ selected_text }} </textarea>
     </div>
     <div class="form-group">
         <label for="note_text">Note Text</label>
-        <textarea name="note_text" rows="4" class="form-control" required></textarea>
+        <textarea name="note_text" rows="4" class="form-control" required>{{ note_text }}</textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Submit Note</button>
+    <button type="submit" class="btn btn-primary">
+        {% if note %}Update{% else %}Submit{% endif %} Note
+    </button>
+    {% if note %}
+        <a href="{% url 'delete_note' article.id note.id %}" class="btn btn-danger mt-3">Delete Note</a>
+    {% endif %}
+
 </form>
 
-{% if error_message %}
-    <div class="alert alert-danger mt-3">{{ error_message }}</div>
-{% endif %}
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const selected_text = urlParams.get('selected_text');
+    if (selected_text) {
+        document.getElementById('selected_text').value = selected_text;
+    }
+</script>
