@@ -1,0 +1,51 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'bookshelf/style.css' %}">
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Query Results</title>
+</head>
+<body>
+
+    <h1>Query Results: {{ table|title }}</h1>
+
+    {% if results %}
+        {% for obj in results %}
+            <div class="entry">
+                {% if table == 'user' %}
+                    <p><strong>Name:</strong> {{ obj.name }}</p>
+                    <p><strong>Age:</strong> {{ obj.age }}</p>
+                    <p><strong>Liked Books:</strong>
+                        {% for book in obj.liked_books.all %}
+                            {{ book.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                    <div class="actions">
+                        <a href="{% url 'edit_user' obj.id %}">Edit    </a>
+                        <form method="post" action="{% url 'delete_user' obj.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                {% elif table == 'book' %}
+                    <p><strong>Name:</strong> {{ obj.name }}</p>
+                    <p><strong>Price:</strong> ${{ obj.price }}</p>
+                    <div class="actions">
+                        <a href="{% url 'edit_book' obj.id %}">Edit    </a>
+                        <form method="post" action="{% url 'delete_book' obj.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No results found for this query.</p>
+    {% endif %}
+
+    <a href="{% url 'index' %}">Back to Home</a>
+
+</body>
+</html>

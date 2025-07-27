@@ -1,0 +1,21 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'annotation/style.css' %}">
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Note</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h3>Are you sure you want to delete this note?</h3>
+    <p><strong>{{ note.note_text }}</strong></p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="{% url 'edit_note' article.id note.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
