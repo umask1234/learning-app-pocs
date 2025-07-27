@@ -24,25 +24,42 @@ def articles(request, article_id=None):
         body = request.POST.get("body")
         source = request.POST.get("source")
         if not title.strip():
-            return render(request, "annotation/notes.html", {
+            return render(request, "annotation/articles.html", {
                 "article": article,
                 "error_message": "You didn't enter a title.",
             })
         if not author.strip():
-            return render(request, "annotation/notes.html", {
+            return render(request, "annotation/articles.html", {
                 "article": article,
                 "error_message": "You didn't enter an author.",
             })
         if not body.strip():
-            return render(request, "annotation/notes.html", {
+            return render(request, "annotation/articles.html", {
                 "article": article,
                 "error_message": "You didn't enter an article body.",
             })
         if not source.strip():
-            return render(request, "annotation/notes.html", {
+            return render(request, "annotation/articles.html", {
                 "article": article,
                 "error_message": "You didn't enter an article source.",
             })
+        if article is None: # if user is creating a new note
+            Article.objects.create(
+                title = title,
+                subtitle = subtitle, 
+                author = author,
+                body = body, 
+                source = source
+            )
+        else: 
+            article.title = title,
+            article.subtitle = subtitle, 
+            article.author = author,
+            article.body = body, 
+            article.source = source
+            article.save()
+
+        return redirect('article-index')
     return render(request, "annotation/articles.html", {
         "article": article if article else None,
     })

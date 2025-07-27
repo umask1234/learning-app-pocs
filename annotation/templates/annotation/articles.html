@@ -4,6 +4,10 @@
 <body>
 
     <h1>{% if article %}Update{% else %}Add New{% endif %} Article</h1>
+     {% if error_message %}
+        <div class="error">{{ error_message }}</div>
+    {% endif %}
+
 
     <form method="post">
         {% csrf_token %}
