@@ -103,4 +103,4 @@ def query_view(request):
 
     results = get_queried_params(table, key, constraint)
     
-    return render(request, 'bookshelf/query_result.html', {'results': results, 'table': table})
+    return render(request, 'bookshelf/query.html', {'results': results, 'table': table})
