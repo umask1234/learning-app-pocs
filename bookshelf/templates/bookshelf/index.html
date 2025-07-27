@@ -1,0 +1,34 @@
+<h1>Users</h1>
+{% for user in users %}
+  <div>
+    <p>{{ user.name }} (Age: {{ user.age }})</p>
+    <p>Liked Books: {% for book in user.liked_books.all %}{{ book.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <a href="{% url 'edit_user' user.id %}">Edit</a>
+    <form method="post" action="{% url 'delete_user' user.id %}">{% csrf_token %}<button type="submit">Delete</button></form>
+  </div>
+{% endfor %}
+<a href="{% url 'add_user' %}">Add New User</a>
+
+<h1>Books</h1>
+{% for book in books %}
+  <div>
+    <p>{{ book.name }} (Price: {{ book.price }})</p>
+    <p>Users that like this book: {% for user in book.user_set.all %}{{ user.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <a href="{% url 'edit_book' book.id %}">Edit</a>
+    <form method="post" action="{% url 'delete_book' book.id %}">{% csrf_token %}<button type="submit">Delete</button></form>
+  </div>
+{% endfor %}
+<a href="{% url 'add_book' %}">Add New Book</a>
+
+<h2>Query</h2>
+<form action="{% url 'query' %}" method="get">
+    <label>Table:
+        <select name="table">
+            <option value="user">User</option>
+            <option value="book">Book</option>
+        </select>
+    </label>
+    <label>Key: <input type="text" name="key" placeholder="e.g. age" /></label>
+    <label>Constraint: <input type="text" name="constraint" placeholder="e.g. > 18" /></label>
+    <button type="submit">Run Query</button>
+</form>
