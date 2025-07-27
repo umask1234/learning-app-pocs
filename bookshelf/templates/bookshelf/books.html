@@ -3,7 +3,7 @@
 
 <body>
 
-    <h1>Add New Book</h1>
+    <h1>{% if name %}Update{% else %}Add New{% endif %} Book</h1>
 
     <form method="post">
         {% csrf_token %}
@@ -13,7 +13,7 @@
         <label for="price">Price:</label>
         <input type="number" id="price" name="price" step="0.01" value="{{ price }}" required>
 
-        <button type="submit">Add Book</button>
+        <button type="submit">{% if name %}Update{% else %}Add New{% endif %} Book</button>
     </form>
 
     <a href="{% url 'index' %}">Back to Home</a>

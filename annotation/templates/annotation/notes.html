@@ -7,7 +7,7 @@
     <title>Article List</title>
 </head>
  {% if error_message %}
-    <div class="alert alert-danger mt-3">{{ error_message }}</div>
+    <div class="error">{{ error_message }}</div>
 {% endif %}
 <form method="POST">
     {% csrf_token %}

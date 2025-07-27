@@ -11,7 +11,7 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.index, name="article-index"),
     path("<int:article_id>/", views.detail, name="detail"),
     path('<int:article_id>/notes/', views.notes, name='add_note'), 
     path('<int:article_id>/notes/<int:note_id>/edit/', views.notes, name='edit_note'),
