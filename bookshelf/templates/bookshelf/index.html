@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'bookshelf/style.css' %}">
+
 <h1>Users</h1>
 {% for user in users %}
   <div>
@@ -28,7 +31,7 @@
             <option value="book">Book</option>
         </select>
     </label>
-    <label>Key: <input type="text" name="key" placeholder="e.g. age" /></label>
-    <label>Constraint: <input type="text" name="constraint" placeholder="e.g. > 18" /></label>
+    <label>Key: <input type="text" name="key"/></label>
+    <label>Constraint: <input type="text" name="constraint"/></label>
     <button type="submit">Run Query</button>
 </form>

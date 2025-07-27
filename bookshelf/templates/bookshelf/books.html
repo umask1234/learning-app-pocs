@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'bookshelf/style.css' %}">
+
 <body>
 
     <h1>Add New Book</h1>
@@ -13,6 +16,6 @@
         <button type="submit">Add Book</button>
     </form>
 
-    <a href="{% url 'index' %}">← Back to Home</a>
+    <a href="{% url 'index' %}">Back to Home</a>
 
 </body>

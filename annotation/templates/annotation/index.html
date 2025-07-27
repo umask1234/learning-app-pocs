@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'annotation/style.css' %}">
+
 <!doctype html>
 <html lang="en-US">
     <head>
@@ -9,11 +12,13 @@
         {% if latest_article_list %}
             <ul>
             {% for article in latest_article_list %}
-                <li><a href="/annotation/{{ article.id }}/">{{ article.title }}</a></li>
+                <li><a href="/annotation/{{ article.id }}/">{{ article.title }}</a> <a href="/annotation/articles/{{ article.id }}/edit/">(click here to edit)</a></li>
+
             {% endfor %}
             </ul>
         {% else %}
             <p>No articles are available.</p>
         {% endif %}
+        <a href="{% url 'add_article' %}">Add Article</a>
     </body>
 </html>

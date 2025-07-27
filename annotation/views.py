@@ -15,6 +15,38 @@ def index(request):
     context = {"latest_article_list": latest_article_list}
     return HttpResponse(template.render(context, request))
 
+def articles(request, article_id=None):
+    article = None if article_id is None else get_object_or_404(Article, pk=article_id)
+    if request.method == "POST":
+        title = request.POST.get("title")
+        subtitle = request.POST.get("subtitle")
+        author = request.POST.get("author")
+        body = request.POST.get("body")
+        source = request.POST.get("source")
+        if not title.strip():
+            return render(request, "annotation/notes.html", {
+                "article": article,
+                "error_message": "You didn't enter a title.",
+            })
+        if not author.strip():
+            return render(request, "annotation/notes.html", {
+                "article": article,
+                "error_message": "You didn't enter an author.",
+            })
+        if not body.strip():
+            return render(request, "annotation/notes.html", {
+                "article": article,
+                "error_message": "You didn't enter an article body.",
+            })
+        if not source.strip():
+            return render(request, "annotation/notes.html", {
+                "article": article,
+                "error_message": "You didn't enter an article source.",
+            })
+    return render(request, "annotation/articles.html", {
+        "article": article if article else None,
+    })
+
 def detail(request, article_id):
     current_article = Article.objects.get(pk=article_id)
     template = loader.get_template("annotation/detail.html")

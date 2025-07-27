@@ -1,0 +1,35 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'annotation/style.css' %}">
+
+<body>
+
+    <h1>{% if article %}Update{% else %}Add New{% endif %} Article</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <textarea id="title" name="title" rows="2" class="form-control">{{ article.title }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="subtitle">Subtitle</label>
+            <textarea id="subtitle" name="subtitle" rows="2" class="form-control">{{ article.subtitle }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <textarea id="author" name="author" rows="2" class="form-control">{{ article.author }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea id="body" name="body" rows="10" class="form-control">{{ article.body }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="source">Source</label>
+            <textarea id="source" name="source" rows="2" class="form-control">{{ article.source }}</textarea>
+        </div>
+        <button type="submit">{% if article %}Edit{% else %}Add{% endif %} Article</button>
+    </form>
+
+    <a href="/annotation/">Back to Home</a>
+
+</body>
